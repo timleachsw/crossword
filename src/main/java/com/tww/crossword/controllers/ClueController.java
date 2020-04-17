@@ -3,6 +3,8 @@ package com.tww.crossword.controllers;
 import com.tww.crossword.models.Clue;
 import com.tww.crossword.repositories.ClueRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,7 +17,7 @@ public class ClueController {
 
     @PostMapping
     public @ResponseBody
-    String addClue (
+    ResponseEntity<Clue> addClue (
             @RequestParam String clue,
             @RequestParam String description,
             @RequestParam String topic,
@@ -31,7 +33,7 @@ public class ClueController {
         newClue.setAuthor(author);
         newClue.setDifficulty(difficulty);
         clueRepository.save(newClue);
-        return "Added clue";
+        return new ResponseEntity<>(newClue, HttpStatus.ACCEPTED);
     }
 
     @GetMapping
