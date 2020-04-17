@@ -1,21 +1,39 @@
 package com.tww.crossword.models;
 
+import org.springframework.validation.annotation.Validated;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.Size;
 
 @Entity
+@Validated
 public class Clue {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    @Size(max = 255)
     private String clue;
+
+    @Size(max = 255)
     private String description;
+
+    @Size(max = 255)
     private String topic;
+
+    @Size(max = 255)
     private String style;
+
+    @Size(max = 255)
     private String author;
+
+    @Min(value = 1)
+    @Max(value = 10)
     private Integer difficulty;
 
     public Integer getId() {
