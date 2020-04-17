@@ -16,7 +16,7 @@ public class ClueController {
     @GetMapping
     public @ResponseBody String sayHello() { return "Hello"; }
 
-    @PostMapping(path="/add")
+    @PostMapping
     public @ResponseBody
     String addClue (
             @RequestParam String clue,
