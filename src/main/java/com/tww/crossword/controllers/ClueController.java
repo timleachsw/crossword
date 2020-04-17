@@ -13,9 +13,6 @@ public class ClueController {
     @Autowired
     private ClueRepository clueRepository;
 
-    @GetMapping
-    public @ResponseBody String sayHello() { return "Hello"; }
-
     @PostMapping
     public @ResponseBody
     String addClue (
@@ -36,4 +33,11 @@ public class ClueController {
         clueRepository.save(newClue);
         return "Added clue";
     }
+
+    @GetMapping
+    public @ResponseBody
+    Iterable<Clue> getAllClues() {
+        return clueRepository.findAll();
+    }
+
 }
