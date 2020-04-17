@@ -10,6 +10,5 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class ClueController {
 
     @GetMapping
-    public @ResponseBody
-    String sayHello() { return "Hello"; }
+    public @ResponseBody String sayHello() { return "Hello"; }
 }
