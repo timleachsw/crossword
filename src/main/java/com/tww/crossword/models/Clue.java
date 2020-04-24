@@ -1,9 +1,7 @@
 package com.tww.crossword.models;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 public class Clue {
@@ -17,6 +15,9 @@ public class Clue {
     private String style;
     private String author;
     private Integer difficulty;
+
+    @OneToMany(mappedBy = "clue")
+    private Set<CrosswordClueInclusion> clueInclusions;
 
     public Integer getId() {
         return id;
@@ -72,5 +73,13 @@ public class Clue {
 
     public void setDifficulty(Integer difficulty) {
         this.difficulty = difficulty;
+    }
+
+    public Set<CrosswordClueInclusion> getClueInclusions() {
+        return clueInclusions;
+    }
+
+    public void setClueInclusions(Set<CrosswordClueInclusion> clueInclusions) {
+        this.clueInclusions = clueInclusions;
     }
 }
