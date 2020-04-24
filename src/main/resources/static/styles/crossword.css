@@ -1,0 +1,13 @@
+.crossword {
+    display: grid;
+    background: black;
+    padding: 1px;
+    grid-gap: 1px;
+    width: auto;
+}
+
+.square {
+    background: white;
+    width: 20px;
+    height: 20px;
+}

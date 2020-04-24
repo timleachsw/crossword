@@ -2,27 +2,12 @@
 <html>
 <body>
 
-    <form action="/clue" method="post">
-        <label for="clue">Clue:</label><br>
-        <input type="text" id="clue" name="clue"><br>
+<form action="/crossword" method="get">
+    <label for="gridSize">Grid Size:</label><br>
+    <input type="number" id="gridSize" name="gridSize"><br>
 
-        <label for="description">Description:</label><br>
-        <input type="text" id="description" name="description"><br>
-
-        <label for="topic">Topic:</label><br>
-        <input type="text" id="topic" name="topic"><br>
-
-        <label for="style">Style:</label><br>
-        <input type="text" id="style" name="style"><br>
-
-        <label for="author">Author:</label><br>
-        <input type="text" id="author" name="author"><br>
-
-        <label for="difficulty">Difficulty:</label><br>
-        <input type="number" id="difficulty" name="difficulty">
-
-        <input type="submit">
-    </form>
+    <input type="submit">
+</form>
 
 </body>
 </html>
