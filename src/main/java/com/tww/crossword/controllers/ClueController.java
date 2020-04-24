@@ -33,7 +33,7 @@ public class ClueController {
         newClue.setAuthor(author);
         newClue.setDifficulty(difficulty);
         clueRepository.save(newClue);
-        return new ResponseEntity<>(newClue, HttpStatus.ACCEPTED);
+        return ResponseEntity.ok().body(newClue);
     }
 
     @GetMapping
