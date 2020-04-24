@@ -10,7 +10,7 @@ public class CrosswordClueInclusion {
 
     private Integer xPosition;
     private Integer yPosition;
-    private String direction;
+    private boolean isAcross;
 
     @ManyToOne
     private Crossword crossword;
@@ -42,12 +42,12 @@ public class CrosswordClueInclusion {
         this.yPosition = yPosition;
     }
 
-    public String getDirection() {
-        return direction;
+    public boolean getIsAcross() {
+        return isAcross;
     }
 
-    public void setDirection(String direction) {
-        this.direction = direction;
+    public void setIsAcross(boolean isAcross) {
+        this.isAcross = isAcross;
     }
 
     public Crossword getCrossword() {
