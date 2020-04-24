@@ -1,9 +1,7 @@
 package com.tww.crossword.models;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 public class Clue {
@@ -11,12 +9,15 @@ public class Clue {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    private String clue;
-    private String description;
+    private String answer;
+    private String hint;
     private String topic;
     private String style;
     private String author;
     private Integer difficulty;
+
+    @OneToMany(mappedBy = "clue")
+    private Set<CrosswordClueInclusion> clueInclusions;
 
     public Integer getId() {
         return id;
@@ -26,20 +27,20 @@ public class Clue {
         this.id = id;
     }
 
-    public String getClue() {
-        return clue;
+    public String getAnswer() {
+        return answer;
     }
 
-    public void setClue(String clue) {
-        this.clue = clue;
+    public void setAnswer(String answer) {
+        this.answer = answer;
     }
 
-    public String getDescription() {
-        return description;
+    public String getHint() {
+        return hint;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setHint(String hint) {
+        this.hint = hint;
     }
 
     public String getTopic() {
@@ -72,5 +73,13 @@ public class Clue {
 
     public void setDifficulty(Integer difficulty) {
         this.difficulty = difficulty;
+    }
+
+    public Set<CrosswordClueInclusion> getClueInclusions() {
+        return clueInclusions;
+    }
+
+    public void setClueInclusions(Set<CrosswordClueInclusion> clueInclusions) {
+        this.clueInclusions = clueInclusions;
     }
 }
