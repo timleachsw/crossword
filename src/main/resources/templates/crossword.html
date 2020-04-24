@@ -6,8 +6,8 @@
     <link href="../static/styles/crossword.css" rel="stylesheet" type="text/css" th:href="@{~/styles/crossword.css}">
 </head>
 <body>
-<form class='crossword' th:style="'grid-template: repeat(' + ${gridSize} + ', 20px) / repeat(' + ${gridSize} + ', 20px);'">
-    <button class='square' formaction="/clue" th:each="i: ${#numbers.sequence(1, gridSize*gridSize)}"></button>
+<form class='crossword' th:style="'grid-template: repeat(' + ${crossword.getxSize()} + ', 20px) / repeat(' + ${crossword.getxSize()} + ', 20px);'">
+    <button class='square' formaction="/clue" th:each="i: ${#numbers.sequence(1, crossword.getxSize()*crossword.getxSize())}"></button>
 </form>
 </body>
 </html>

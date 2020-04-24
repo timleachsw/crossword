@@ -1,5 +1,6 @@
 package com.tww.crossword.controllers;
 
+import com.tww.crossword.models.Crossword;
 import com.tww.crossword.services.CrosswordService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,20 +16,21 @@ public class CrosswordController {
 
     @GetMapping(path="/new")
     public String createCrossword(@RequestParam(name="gridSize", required=false, defaultValue="13") Integer gridSize, Model model) {
-        crosswordService.createCrossword(gridSize);
-        model.addAttribute("gridSize", gridSize);
+        Crossword crossword = crosswordService.createCrossword(gridSize);
+        model.addAttribute("crossword", crossword);
         return "crossword";
     }
 
     @GetMapping
     public String updateCrossword(
-            @RequestParam(name="id", required=false, defaultValue="13") Integer id,
-            @RequestParam(name="clue", required=false, defaultValue="13") String clue,
-            @RequestParam(name="clue", required=false, defaultValue="13") Integer x,
-            @RequestParam(name="clue", required=false, defaultValue="13") Integer y,
-            @RequestParam(name="clue", required=false, defaultValue="13") Boolean isAcross,
-            Model model) {
-        CrosswordService.updateCrossword(id, clue, x, y, isAcross);
+            @RequestParam(name="crosswordId", required=false, defaultValue="13") Integer crosswordId,
+            @RequestParam(name="clueId", required=false, defaultValue="13") Integer clueId,
+            @RequestParam(name="x", required=false, defaultValue="13") Integer x,
+            @RequestParam(name="y", required=false, defaultValue="13") Integer y,
+            @RequestParam(name="isAcross", required=false, defaultValue="13") boolean isAcross,
+            Model model) throws Exception {
+        Crossword crossword = crosswordService.updateCrossword(crosswordId, clueId, x, y, isAcross);
+        model.addAttribute("crossword", crossword);
         return "crossword";
     }
 }
