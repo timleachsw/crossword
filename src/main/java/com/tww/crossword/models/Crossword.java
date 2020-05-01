@@ -11,8 +11,7 @@ public class Crossword {
 
     private String name;
     private String author;
-    private Integer xSize;
-    private Integer ySize;
+    private Integer size;
 
     @OneToMany(mappedBy = "crossword")
     private Set<CrosswordClueInclusion> clueInclusions;
@@ -49,19 +48,11 @@ public class Crossword {
         this.clueInclusions = clueInclusions;
     }
 
-    public Integer getxSize() {
-        return xSize;
+    public Integer getSize() {
+        return size;
     }
 
-    public void setxSize(Integer xSize) {
-        this.xSize = xSize;
-    }
-
-    public Integer getySize() {
-        return ySize;
-    }
-
-    public void setySize(Integer ySize) {
-        this.ySize = ySize;
+    public void setSize(Integer size) {
+        this.size = size;
     }
 }
