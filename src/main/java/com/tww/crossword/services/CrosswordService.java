@@ -21,8 +21,7 @@ public class CrosswordService {
 
     public Crossword createCrossword(Integer gridSize) {
         Crossword newCrossword = new Crossword();
-        newCrossword.setxSize(gridSize);
-        newCrossword.setySize(gridSize);
+        newCrossword.setSize(gridSize);
         crosswordRepository.save(newCrossword);
         return newCrossword;
     }
