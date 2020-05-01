@@ -1,0 +1,34 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Your Crossword</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link href="../static/styles/crossword.css" rel="stylesheet" type="text/css" th:href="@{~/styles/crossword.css}">
+</head>
+<body>
+<div class='crossword' th:style="'grid-template: repeat(' + ${gridSize} + ', 20px) / repeat(' + ${gridSize} + ', 20px);'">
+    <div th:class="'${i} square'" th:each="i: ${#numbers.sequence(1, gridSize*gridSize)}"></div>
+</div>
+<form action="/crossword" method="get">
+    <label for="across-clue">Clue across</label>
+    <select name="clueId" id="across-clue">
+        <option value="">Choose a clue</option>
+        <option th:each="clue: ${clues}" th:value="${clue.id}" th:text="${clue.answer}"></option>
+    </select>
+    <input type="submit" value="Add across clue">
+    <input type="hidden" name="isAcross" value="true">
+    <input type="hidden" name="crosswordId" th:value="${crosswordId}">
+    <input type="hidden" name="x" th:value="${xPosition}">
+    <input type="hidden" name="y" th:value="${yPosition}">
+</form>
+<form action="/crossword" method="post">
+    <label for="down-clue">Clue down</label>
+    <select name="clueId" id="down-clue">
+        <option value="">Choose a clue</option>
+        <option th:each="clue: ${clues}" th:value="${clue.id}" th:text="${clue.answer}"></option>
+    </select>
+    <input type="submit" value="Add down clue">
+    <input type="hidden" name="isAcross" value="false">
+</form>
+</body>
+</html>
