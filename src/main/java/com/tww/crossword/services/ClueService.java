@@ -75,10 +75,11 @@ public class ClueService {
     }
 
     private boolean isValidCharacter(String newLetter, Integer x, Integer y, Crossword crossword) {
-        String existingLetter = crossword.getLetterForLocation(x, y);
-        if (existingLetter.isEmpty() || existingLetter.equals(newLetter)) {
-            return true;
-        }
-        return false;
+        return true;
+//        String existingLetter = crossword.getLetterForLocation(x, y);
+//        if (existingLetter.isEmpty() || existingLetter.equals(newLetter)) {
+//            return true;
+//        }
+//        return false;
     }
 }

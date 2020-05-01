@@ -13,7 +13,7 @@
     <label for="across-clue">Clue across</label>
     <select name="clueId" id="across-clue">
         <option value="">Choose a clue</option>
-        <option th:each="clue: ${clues}" th:value="${clue.id}" th:text="${clue.answer}"></option>
+        <option th:each="clue: ${clues[0]}" th:value="${clue.id}" th:text="${clue.answer}"></option>
     </select>
     <input type="submit" value="Add across clue">
     <input type="hidden" name="isAcross" value="true">
@@ -21,11 +21,11 @@
     <input type="hidden" name="x" th:value="${xPosition}">
     <input type="hidden" name="y" th:value="${yPosition}">
 </form>
-<form action="/crossword" method="post">
+<form action="/crossword" method="get">
     <label for="down-clue">Clue down</label>
     <select name="clueId" id="down-clue">
         <option value="">Choose a clue</option>
-        <option th:each="clue: ${clues}" th:value="${clue.id}" th:text="${clue.answer}"></option>
+        <option th:each="clue: ${clues[1]}" th:value="${clue.id}" th:text="${clue.answer}"></option>
     </select>
     <input type="submit" value="Add down clue">
     <input type="hidden" name="isAcross" value="false">

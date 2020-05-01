@@ -31,18 +31,6 @@ public class ClueController {
         return ResponseEntity.ok().body(newClue);
     }
 
-    @PostMapping(path="somethingpathy")
-    public String getValidClues (
-            @RequestParam Integer x,
-            @RequestParam Integer y,
-            @RequestParam Integer crosswordId,
-            Model model
-    ) throws Exception {
-        List<List<Clue>> validClues = clueService.getValidClues(x, y, crosswordId);
-        model.addAttribute("validClues", validClues);
-        return "somethingcluey";
-    }
-
     @GetMapping
     public @ResponseBody
     Iterable<Clue> getAllClues() {
