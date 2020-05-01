@@ -5,10 +5,7 @@ import com.tww.crossword.services.ClueService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @Controller
 @RequestMapping(path = "/clue")
@@ -31,19 +28,7 @@ public class ClueController {
         return ResponseEntity.ok().body(newClue);
     }
 
-    @GetMapping(path="somethingpathy")
-    public String getValidClues (
-            @RequestParam Integer x,
-            @RequestParam Integer y,
-            @RequestParam Integer crosswordId,
-            Model model
-    ) throws Exception {
-        List<List<Clue>> validClues = clueService.getValidClues(x, y, crosswordId);
-        model.addAttribute("validClues", validClues);
-        return "somethingcluey";
-    }
-
-    @GetMapping(path = "/all")
+    @GetMapping
     public @ResponseBody
     Iterable<Clue> getAllClues() {
         return clueService.getAllClues();

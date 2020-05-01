@@ -77,10 +77,7 @@ public class ClueService {
 
     private boolean isValidCharacter(String newLetter, Integer x, Integer y, Crossword crossword) {
         String existingLetter = crossword.getLetterForLocation(x, y);
-        if (existingLetter.isEmpty() || existingLetter.equals(newLetter)) {
-            return true;
-        }
-        return false;
+        return existingLetter.isEmpty() || existingLetter.equals(newLetter);
     }
 
     private boolean isClueTooLong(Integer clueLength, Integer x, Integer y, Crossword crossword, boolean isAcross) {

@@ -55,4 +55,28 @@ public class Crossword {
     public void setSize(Integer size) {
         this.size = size;
     }
+
+    public String getLetterForLocation(int x, int y) {
+        for (CrosswordClueInclusion clueInclusion : clueInclusions) {
+            int clueLength = clueInclusion.getClue().getAnswer().length();
+            int clueStartX = clueInclusion.getxPosition();
+            int clueStartY = clueInclusion.getyPosition();
+            String answer = clueInclusion.getClue().getAnswer();
+
+            if (clueStartX == x && clueStartY == y) {
+                return answer.substring(0, 1);
+            } else if (clueStartX == x && clueStartY < y && !clueInclusion.getIsAcross()) {
+                int relativeY = y - clueStartY;
+                if (relativeY < clueLength) {
+                    return answer.substring(relativeY, relativeY + 1);
+                }
+            } else if (clueStartX < x && clueStartY == y && clueInclusion.getIsAcross()) {
+                int relativeX = x - clueStartX;
+                if (relativeX < clueLength) {
+                    return answer.substring(relativeX, relativeX + 1);
+                }
+            }
+        }
+        return "";
+    }
 }
