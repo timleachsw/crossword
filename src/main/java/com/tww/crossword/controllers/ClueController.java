@@ -31,7 +31,7 @@ public class ClueController {
         return ResponseEntity.ok().body(newClue);
     }
 
-    @PostMapping
+    @PostMapping(path="somethingpathy")
     public String getValidClues (
             @RequestParam Integer x,
             @RequestParam Integer y,
