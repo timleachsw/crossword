@@ -81,6 +81,6 @@ public class ClueService {
     }
 
     private boolean isClueTooLong(Integer clueLength, Integer x, Integer y, Crossword crossword, boolean isAcross) {
-        return isAcross ? x + clueLength < crossword.getSize() : y + clueLength < crossword.getSize();
+        return isAcross ? x + clueLength > crossword.getSize() : y + clueLength > crossword.getSize();
     }
 }
