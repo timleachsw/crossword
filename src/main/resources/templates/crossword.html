@@ -6,8 +6,16 @@
     <link href="../static/styles/crossword.css" rel="stylesheet" type="text/css" th:href="@{~/styles/crossword.css}">
 </head>
 <body>
-<form class='crossword' th:style="'grid-template: repeat(' + ${crossword.getSize()} + ', 20px) / repeat(' + ${crossword.getSize()} + ', 20px);'">
-    <button class='square' formaction="/clue" th:each="i: ${#numbers.sequence(1, crossword.getSize()*crossword.getSize())}"></button>
-</form>
+<div
+        class='crossword'
+        th:style="'grid-template: repeat(' + ${crossword.size} + ', 20px) / repeat(' + ${crossword.size} + ', 20px);'"
+>
+    <form action="/add_clue" method="get" th:each="i: ${#numbers.sequence(1, crossword.size*crossword.size)}">
+        <input type="submit" class='square' value="">
+        <input type="hidden" name="crosswordId" th:value="${crosswordId}">
+        <input type="hidden" name="xPosition" th:value="${(i - 1) % crossword.size}">
+        <input type="hidden" name="yPosition" th:value="${((i - 1) - ((i - 1) % crossword.size)) / crossword.size}">
+    </form>
+</div>
 </body>
 </html>

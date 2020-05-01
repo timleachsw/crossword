@@ -29,9 +29,9 @@ public class AddClueToCrosswordController {
 
     @GetMapping
     public String crossword(
-            @RequestParam(name="crossword_id", required=true) Integer crosswordId,
-            @RequestParam(name="x_position", required=true) Integer xPosition,
-            @RequestParam(name="y_position", required=true) Integer yPosition,
+            @RequestParam(name="crosswordId", required=true) Integer crosswordId,
+            @RequestParam(name="xPosition", required=true) Integer xPosition,
+            @RequestParam(name="yPosition", required=true) Integer yPosition,
             Model model
     ) throws Exception {
         // Change, later, to only the clues that will fit here
