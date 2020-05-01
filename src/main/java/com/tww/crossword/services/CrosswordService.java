@@ -7,6 +7,8 @@ import com.tww.crossword.repositories.CrosswordRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class CrosswordService {
 
@@ -22,8 +24,7 @@ public class CrosswordService {
     public Crossword createCrossword(Integer gridSize) {
         Crossword newCrossword = new Crossword();
         newCrossword.setSize(gridSize);
-        crosswordRepository.save(newCrossword);
-        return newCrossword;
+        return crosswordRepository.save(newCrossword);
     }
 
     public Crossword updateCrossword(Integer crosswordId, Integer clueId, Integer x, Integer y, boolean isAcross) throws Exception {

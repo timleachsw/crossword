@@ -40,6 +40,7 @@ public class Crossword {
         this.author = author;
     }
 
+    @OneToMany(mappedBy = "crossword")
     public Set<CrosswordClueInclusion> getClueInclusions() {
         return clueInclusions;
     }
@@ -57,7 +58,7 @@ public class Crossword {
     }
 
     public String getLetterForLocation(int x, int y) {
-        for (CrosswordClueInclusion clueInclusion : clueInclusions) {
+        for (CrosswordClueInclusion clueInclusion : getClueInclusions()) {
             int clueLength = clueInclusion.getClue().getAnswer().length();
             int clueStartX = clueInclusion.getxPosition();
             int clueStartY = clueInclusion.getyPosition();
