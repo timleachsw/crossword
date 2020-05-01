@@ -1,18 +1,21 @@
 package com.tww.crossword.controllers;
 
 import com.tww.crossword.models.Clue;
-import com.tww.crossword.repositories.ClueRepository;
+import com.tww.crossword.services.ClueService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Controller
 @RequestMapping(path = "/clue")
 public class ClueController {
 
     @Autowired
-    private ClueRepository clueRepository;
+    private ClueService clueService;
 
     @PostMapping
     public @ResponseBody
@@ -24,21 +27,26 @@ public class ClueController {
             @RequestParam String author,
             @RequestParam Integer difficulty
     ) {
-        Clue newClue = new Clue();
-        newClue.setAnswer(answer);
-        newClue.setHint(hint);
-        newClue.setTopic(topic);
-        newClue.setStyle(style);
-        newClue.setAuthor(author);
-        newClue.setDifficulty(difficulty);
-        clueRepository.save(newClue);
+        Clue newClue = clueService.createClue(answer, hint, topic, style, author, difficulty);
         return ResponseEntity.ok().body(newClue);
+    }
+
+    @PostMapping(path="somethingpathy")
+    public String getValidClues (
+            @RequestParam Integer x,
+            @RequestParam Integer y,
+            @RequestParam Integer crosswordId,
+            Model model
+    ) throws Exception {
+        List<List<Clue>> validClues = clueService.getValidClues(x, y, crosswordId);
+        model.addAttribute("validClues", validClues);
+        return "somethingcluey";
     }
 
     @GetMapping
     public @ResponseBody
     Iterable<Clue> getAllClues() {
-        return clueRepository.findAll();
+        return clueService.getAllClues();
     }
 
 }
