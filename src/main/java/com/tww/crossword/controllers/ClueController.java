@@ -31,7 +31,7 @@ public class ClueController {
         return ResponseEntity.ok().body(newClue);
     }
 
-    @PostMapping(path="somethingpathy")
+    @GetMapping(path="somethingpathy")
     public String getValidClues (
             @RequestParam Integer x,
             @RequestParam Integer y,
@@ -43,7 +43,7 @@ public class ClueController {
         return "somethingcluey";
     }
 
-    @GetMapping
+    @GetMapping(path = "/all")
     public @ResponseBody
     Iterable<Clue> getAllClues() {
         return clueService.getAllClues();

@@ -62,6 +62,7 @@ public class ClueService {
     }
 
     private boolean isValidClue(Clue clue, Integer x, Integer y, Crossword crossword, boolean isAcross) {
+        if (isClueTooLong(clue.getAnswer().length(), x, y, crossword, isAcross)) { return false; }
         String[] letters = clue.getAnswer().split("");
         for (int i = 0; i < letters.length; i++) {
             boolean isValid = isAcross ?
@@ -80,5 +81,9 @@ public class ClueService {
             return true;
         }
         return false;
+    }
+
+    private boolean isClueTooLong(Integer clueLength, Integer x, Integer y, Crossword crossword, boolean isAcross) {
+        return isAcross ? x + clueLength < crossword.getSize() : y + clueLength < crossword.getSize();
     }
 }
