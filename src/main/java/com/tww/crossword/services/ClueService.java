@@ -14,6 +14,8 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
 
+import static org.thymeleaf.util.StringUtils.concat;
+
 @Service
 public class ClueService {
 
@@ -64,10 +66,11 @@ public class ClueService {
     private boolean isValidClue(Clue clue, Integer x, Integer y, Crossword crossword, boolean isAcross) {
         if (isClueTooLong(clue.getAnswer().length(), x, y, crossword, isAcross)) { return false; }
         String[] letters = clue.getAnswer().split("");
-        for (int i = 0; i < letters.length; i++) {
+        if (!isValidFirstCharacter(letters[0], x, y, crossword)) { return false; }
+        for (int i = 1; i < letters.length; i++) {
             boolean isValid = isAcross ?
-                    isValidCharacter(letters[i], x+i, y, crossword) :
-                    isValidCharacter(letters[i], x, y+i, crossword);
+                    isValidAcrossCharacter(letters[i], x+i, y, crossword) :
+                    isValidDownCharacter(letters[i], x, y+i, crossword);
             if (!isValid) {
                 return false;
             }
@@ -75,9 +78,44 @@ public class ClueService {
         return true;
     }
 
-    private boolean isValidCharacter(String newLetter, Integer x, Integer y, Crossword crossword) {
-        String existingLetter = crossword.getLetterForLocation(x, y);
-        return existingLetter.isEmpty() || existingLetter.equals(newLetter);
+    private boolean isValidAcrossCharacter(String newLetter, Integer x, Integer y, Crossword crossword) {
+        newLetter = newLetter.toLowerCase();
+        String existingLetter = crossword.getLetterForLocation(x, y).toLowerCase();
+        if (existingLetter.isEmpty()) {
+            String down = crossword.getLetterForLocation(Math.min(crossword.getSize(),x+1), y);
+            String left = crossword.getLetterForLocation(x, Math.max(0,y-1));
+            String right = crossword.getLetterForLocation(x, Math.min(crossword.getSize(),y+1));
+            String all = concat(down, left, right);
+            return all.isEmpty();
+        }
+        return existingLetter.equals(newLetter);
+    }
+
+    private boolean isValidDownCharacter(String newLetter, Integer x, Integer y, Crossword crossword) {
+        newLetter = newLetter.toLowerCase();
+        String existingLetter = crossword.getLetterForLocation(x, y).toLowerCase();
+        if (existingLetter.isEmpty()) {
+            String up = crossword.getLetterForLocation(Math.max(0,x-1), y);
+            String down = crossword.getLetterForLocation(Math.min(crossword.getSize(),x+1), y);
+            String right = crossword.getLetterForLocation(x, Math.min(crossword.getSize(),y+1));
+            String all = concat(down, up, right);
+            return all.isEmpty();
+        }
+        return existingLetter.equals(newLetter);
+    }
+
+    private boolean isValidFirstCharacter(String newLetter, Integer x, Integer y, Crossword crossword) {
+        newLetter = newLetter.toLowerCase();
+        String existingLetter = crossword.getLetterForLocation(x, y).toLowerCase();
+        if (existingLetter.isEmpty()) {
+            String up = crossword.getLetterForLocation(Math.max(0,x-1), y);
+            String down = crossword.getLetterForLocation(Math.min(crossword.getSize(),x+1), y);
+            String left = crossword.getLetterForLocation(x, Math.max(0,y-1));
+            String right = crossword.getLetterForLocation(x, Math.min(crossword.getSize(),y+1));
+            String all = concat(up, down, left, right);
+            return all.isEmpty();
+        }
+        return existingLetter.equals(newLetter);
     }
 
     private boolean isClueTooLong(Integer clueLength, Integer x, Integer y, Crossword crossword, boolean isAcross) {

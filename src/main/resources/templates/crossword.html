@@ -6,16 +6,18 @@
     <link href="../static/styles/crossword.css" rel="stylesheet" type="text/css" th:href="@{~/styles/crossword.css}">
 </head>
 <body>
-<div
-        class='crossword'
-        th:style="'grid-template: repeat(' + ${crossword.size} + ', 20px) / repeat(' + ${crossword.size} + ', 20px);'"
->
-    <form action="/add_clue" method="get" th:each="i: ${#numbers.sequence(1, crossword.size*crossword.size)}">
-        <input type="submit" class='square' th:value="${crossword.getLetterForLocation((i - 1) % crossword.getSize(), ((i - 1) - ((i - 1) % crossword.getSize())) / crossword.getSize())}">
-        <input type="hidden" name="crosswordId" th:value="${crossword.getId()}">
-        <input type="hidden" name="xPosition" th:value="${(i - 1) % crossword.size}">
-        <input type="hidden" name="yPosition" th:value="${((i - 1) - ((i - 1) % crossword.size)) / crossword.size}">
-    </form>
+<div class="crossword-container" th:style="'width:' + ${1 + crossword.getSize()*21} + 'px'">
+    <div
+            class='crossword'
+            th:style="'grid-template: repeat(' + ${crossword.size} + ', 20px) / repeat(' + ${crossword.size} + ', 20px);'"
+    >
+        <form action="/add_clue" method="get" th:each="i: ${#numbers.sequence(1, crossword.size*crossword.size)}">
+            <input type="submit" class='square' th:value="${crosswordVM.getSquares()[i-1].getLetter()}">
+            <input type="hidden" name="crosswordId" th:value="${crossword.getId()}">
+            <input type="hidden" name="xPosition" th:value="${(i - 1) % crossword.size}">
+            <input type="hidden" name="yPosition" th:value="${((i - 1) - ((i - 1) % crossword.size)) / crossword.size}">
+        </form>
+    </div>
 </div>
 <form action="/publish" method="get">
     <input type="submit" value="Publish">

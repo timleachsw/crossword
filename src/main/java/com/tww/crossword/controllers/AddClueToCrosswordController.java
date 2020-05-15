@@ -44,6 +44,7 @@ public class AddClueToCrosswordController {
         }
 
         model.addAttribute("crossword", crossword.get());
+        model.addAttribute("crosswordVM", crossword.get().getCrosswordViewModel());
         model.addAttribute("xPosition", xPosition);
         model.addAttribute("yPosition", yPosition);
         model.addAttribute("clues", validClues);

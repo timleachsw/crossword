@@ -1,6 +1,6 @@
 package com.tww.crossword.viewModels;
 
-public class Square {
+public class SquareViewModel {
     private String letter;
     private int number;
     private int position;

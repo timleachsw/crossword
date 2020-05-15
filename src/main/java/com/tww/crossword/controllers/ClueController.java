@@ -27,10 +27,4 @@ public class ClueController {
         Clue newClue = clueService.createClue(answer, hint, topic, style, author, difficulty);
         return ResponseEntity.ok().body(newClue);
     }
-
-    @GetMapping
-    public @ResponseBody
-    Iterable<Clue> getAllClues() {
-        return clueService.getAllClues();
-    }
 }

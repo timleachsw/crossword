@@ -22,6 +22,7 @@ public class PublishController {
             Model model) throws Exception {
         Crossword crossword = crosswordService.getCrossword(crosswordId);
         model.addAttribute("crossword", crossword);
+        model.addAttribute("crosswordVM", crossword.getCrosswordViewModel());
         model.addAttribute("acrossClues", crossword.getAcrossClues());
         model.addAttribute("downClues", crossword.getDownClues());
         return "publish";

@@ -6,25 +6,30 @@
     <link href="../static/styles/crossword.css" rel="stylesheet" type="text/css" th:href="@{~/styles/crossword.css}">
 </head>
 <body>
-<div class='crossword' th:style="'grid-template: repeat(' + ${crossword.getSize()} + ', 20px) / repeat(' + ${crossword.getSize()} + ', 20px);'">
-    <div th:class="'${i} square'"
-         th:each="i: ${#numbers.sequence(1, crossword.getSize()*crossword.getSize())}"
-         th:style="${crossword.getLetterForLocation((i - 1) % crossword.getSize(), ((i - 1) - ((i - 1) % crossword.getSize())) / crossword.getSize())} == '' ? 'background-color: black;' : ''"
-    >
+<div class="crossword-container" th:style="'width:' + ${1 + crossword.getSize()*21} + 'px'">
+    <div class='crossword' th:style="'grid-template: repeat(' + ${crossword.getSize()} + ', 20px) / repeat(' + ${crossword.getSize()} + ', 20px);'">
+        <div th:class="'${i} square'"
+             th:each="square : ${crosswordVM.getSquares()}"
+             th:style="${square.getLetter()} == '' ? 'background-color: black;' : ''"
+        >
+            <span th:text="${square.getNumber()} ? ${square.getNumber()} : ''"></span>
+        </div>
     </div>
 </div>
 <div>
     Across
-    <div th:each="clue : ${acrossClues}">
+    <div th:each="clue : ${crosswordVM.getAcrossClues()}">
+        <span th:text="${clue.getClueNumber()}"></span>
         <span th:text="${clue.getHint()}"></span>
+        <span th:text="' (' + ${clue.getAnswer().length()} + ')'"></span>
     </div>
 </div>
 <div>
     Down
-    <div th:each="clueInclusion : ${crossword.getClueInclusions()}">
-        <div th:each="clue : ${downClues}">
-            <span th:text="${clue.getHint()}"></span>
-        </div>
+    <div th:each="clue : ${crosswordVM.getDownClues()}">
+        <span th:text="${clue.getClueNumber()}"></span>
+        <span th:text="${clue.getHint()}"></span>
+        <span th:text="' (' + ${clue.getAnswer().length()} + ')'"></span>
     </div>
 </div>
 </body>
