@@ -33,5 +33,4 @@ public class ClueController {
     Iterable<Clue> getAllClues() {
         return clueService.getAllClues();
     }
-
 }

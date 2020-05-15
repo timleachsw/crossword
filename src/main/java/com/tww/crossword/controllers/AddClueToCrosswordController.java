@@ -43,6 +43,7 @@ public class AddClueToCrosswordController {
             return "error";
         }
 
+        model.addAttribute("crossword", crossword.get());
         model.addAttribute("gridSize", crossword.get().getSize());
         model.addAttribute("crosswordId", crosswordId);
         model.addAttribute("xPosition", xPosition);

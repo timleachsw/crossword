@@ -7,7 +7,9 @@
 </head>
 <body>
 <div class='crossword' th:style="'grid-template: repeat(' + ${gridSize} + ', 20px) / repeat(' + ${gridSize} + ', 20px);'">
-    <div th:class="'${i} square'" th:each="i: ${#numbers.sequence(1, gridSize*gridSize)}"></div>
+    <div th:class="'${i} square'" th:each="i: ${#numbers.sequence(1, gridSize*gridSize)}">
+        <span th:text="${crossword.getLetterForLocation((i - 1) % crossword.getSize(), ((i - 1) - ((i - 1) % crossword.getSize())) / crossword.getSize())}"></span>
+    </div>
 </div>
 <form action="/crossword" method="get">
     <label for="across-clue">Clue across</label>
@@ -29,6 +31,9 @@
     </select>
     <input type="submit" value="Add down clue">
     <input type="hidden" name="isAcross" value="false">
+    <input type="hidden" name="crosswordId" th:value="${crosswordId}">
+    <input type="hidden" name="x" th:value="${xPosition}">
+    <input type="hidden" name="y" th:value="${yPosition}">
 </form>
 </body>
 </html>

@@ -12,7 +12,7 @@
 >
     <form action="/add_clue" method="get" th:each="i: ${#numbers.sequence(1, crossword.size*crossword.size)}">
         <input type="submit" class='square' th:value="${crossword.getLetterForLocation((i - 1) % crossword.getSize(), ((i - 1) - ((i - 1) % crossword.getSize())) / crossword.getSize())}">
-        <input type="hidden" name="crosswordId" th:value="${crosswordId}">
+        <input type="hidden" name="crosswordId" th:value="${crossword.getId()}">
         <input type="hidden" name="xPosition" th:value="${(i - 1) % crossword.size}">
         <input type="hidden" name="yPosition" th:value="${((i - 1) - ((i - 1) % crossword.size)) / crossword.size}">
     </form>

@@ -18,7 +18,6 @@ public class CrosswordController {
     public String createCrossword(@RequestParam(name="gridSize", required=false, defaultValue="13") Integer gridSize, Model model) {
         Crossword crossword = crosswordService.createCrossword(gridSize);
         model.addAttribute("crossword", crossword);
-        model.addAttribute("crosswordId", crossword.getId());
         return "crossword";
     }
 
@@ -32,7 +31,6 @@ public class CrosswordController {
             Model model) throws Exception {
         Crossword crossword = crosswordService.updateCrossword(crosswordId, clueId, x, y, isAcross);
         model.addAttribute("crossword", crossword);
-        model.addAttribute("crosswordId", crossword.getId());
         return "crossword";
     }
 }
