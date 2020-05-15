@@ -17,5 +17,9 @@
         <input type="hidden" name="yPosition" th:value="${((i - 1) - ((i - 1) % crossword.size)) / crossword.size}">
     </form>
 </div>
+<form action="/publish" method="get">
+    <input type="submit" value="Publish">
+    <input type="hidden" name="crosswordId" th:value="${crossword.getId()}">
+</form>
 </body>
 </html>

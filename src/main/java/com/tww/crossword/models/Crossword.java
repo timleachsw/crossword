@@ -1,7 +1,10 @@
 package com.tww.crossword.models;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Entity
 public class Crossword {
@@ -55,6 +58,18 @@ public class Crossword {
 
     public void setSize(Integer size) {
         this.size = size;
+    }
+
+    public List<Clue> getAcrossClues() {
+        return this.clueInclusions.stream().filter(CrosswordClueInclusion::getIsAcross)
+                .map(CrosswordClueInclusion::getClue)
+                .collect(Collectors.toList());
+    }
+
+    public List<Clue> getDownClues() {
+        return this.clueInclusions.stream().filter(clueInclusion -> !clueInclusion.getIsAcross())
+                .map(CrosswordClueInclusion::getClue)
+                .collect(Collectors.toList());
     }
 
     public String getLetterForLocation(int x, int y) {
